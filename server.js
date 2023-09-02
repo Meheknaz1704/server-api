@@ -36,6 +36,20 @@ app.post('/user', (req, res) => {
         }
     })
 });
+
+app.get("/singleUser/:id", (req, res) => {
+    const { id } = req.params;
+    const  user = db.users.find((user) => user.id == id);
+    if(user){
+        res.status(202).json(user);
+    } else{
+        res.status(404).json({
+            data: {
+                message:  "user not found",
+            },
+        });
+    }
+});
 // Update user 
 app.put('/user/:id', (req, res) => {
     const id = parseInt(req.params.id);
